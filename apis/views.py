@@ -4,14 +4,16 @@ from hotels.models import Hotel, Room
 from .serializers import HotelListSerializer, HotelDetailSerializer, RoomDetailSerializer
 
 
-class HotelList(generics.ListAPIView):
+class HotelList(generics.ListCreateAPIView):
     queryset = Hotel.objects.all()
     serializer_class = HotelListSerializer
 
 
-class HotelDetail(generics.RetrieveDestroyAPIView):
+class HotelDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Hotel.objects.all()
     serializer_class = HotelDetailSerializer
+
+    lookup_field = "code"
 
 
 class RoomList(generics.ListAPIView):
@@ -19,7 +21,7 @@ class RoomList(generics.ListAPIView):
     serializer_class = RoomDetailSerializer
 
     def get_queryset(self):
-        hotel_code = self.kwargs['pk']
+        hotel_code = self.kwargs['code']
         checkin_date = self.kwargs['checkin_date']
         checkout_date = self.kwargs['checkout_date']
-        return Room.objects.filter(pk=hotel_code, checkin_date__lte=checkin_date, checkout_date__gte=checkout_date)
+        return Room.objects.filter(hotel=hotel_code, checkin_date__lte=checkin_date, checkout_date__gte=checkout_date)
