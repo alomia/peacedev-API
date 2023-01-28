@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from hotels.models import Hotel, Room, Inventory
+from hotels.models import Hotel, Inventory
 
 
 class HotelListSerializer(serializers.ModelSerializer):
@@ -21,10 +21,15 @@ class HotelDetailSerializer(serializers.ModelSerializer):
         model = Hotel
 
 
-class RoomDetailSerializer(serializers.ModelSerializer):
+class InventoryDetailSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source="rate.room.name", read_only=True)
+    code = serializers.CharField(source="rate.room.code", read_only=True)
+
     class Meta:
         fields = (
             "name",
             "code",
+            "price",
+            "allotment",
         )
-        model = Room
+        model = Inventory

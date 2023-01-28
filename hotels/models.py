@@ -31,7 +31,7 @@ class Rate(models.Model):
 
 
 class Inventory(models.Model):
-    allotment = models.IntegerField()
+    allotment = models.IntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     rate = models.ForeignKey(Rate, on_delete=models.CASCADE)
 

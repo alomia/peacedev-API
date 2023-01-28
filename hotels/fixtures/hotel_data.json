@@ -1,0 +1,26 @@
+[
+  {
+    "model": "hotels.Hotel",
+    "fields": { "code": "H001", "name": "Hotel 1" }
+  },
+  {
+    "model": "hotels.Room",
+    "fields": {
+      "name": "Habitación 1",
+      "code": "R001",
+      "hotel": "H001",
+      "checkin_date": "2023-01-28",
+      "checkout_date": "2023-02-05"
+    }
+  },
+  {
+    "model": "hotels.Rate",
+    "pk": 1,
+    "fields": { "name": "Tarifa 1", "code": "T001", "room": 1 }
+  },
+  {
+    "model": "hotels.Inventory",
+    "pk": 1,
+    "fields": { "allotment": 20, "price": "100.00", "rate": 1 }
+  }
+]

@@ -6,10 +6,7 @@ from .models import Hotel
 class BlogTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.hotel = Hotel.objects.create(
-            name="Hotel Casa Pestagua",
-            code="HTCPE-08"
-        )
+        cls.hotel = Hotel.objects.create(name="Hotel Casa Pestagua", code="HTCPE-08")
 
     def test_model_content(self):
         self.assertEqual(self.hotel.name, "Hotel Casa Pestagua")

@@ -7,18 +7,18 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hotels', '0003_rate_inventory'),
+        ("hotels", "0003_rate_inventory"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='room',
-            name='check_in',
+            model_name="room",
+            name="check_in",
             field=models.DateField(default=django.utils.timezone.now),
         ),
         migrations.AddField(
-            model_name='room',
-            name='check_out',
+            model_name="room",
+            name="check_out",
             field=models.DateField(default=django.utils.timezone.now),
         ),
     ]
