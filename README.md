@@ -57,7 +57,7 @@ cd peacedev-API
 
 ### Script:
 
-En el directorio existe un script llamado `build.sh`, el cual puedes ejecutar para construir y correr este proyecto.
+En el directorio existe un script llamado `build.py`, el cual puedes ejecutar para construir y correr este proyecto.
 
 ```bash
 ./build.py
