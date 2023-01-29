@@ -1,26 +1,73 @@
 [
   {
     "model": "hotels.Hotel",
-    "fields": { "code": "H001", "name": "Hotel 1" }
+    "fields": {
+      "code": "HTSSC01",
+      "name": "Hotel Sofitel Santa Clara - Cartagena"
+    }
+  },
+  {
+    "model": "hotels.Hotel",
+    "fields": { "code": "HTWB01", "name": "Hotel W Bogotá - Bogotá" }
+  },
+  {
+    "model": "hotels.Hotel",
+    "fields": { "code": "HTELF01", "name": "Hotel Estelar La Fontana - Bogotá" }
+  },
+
+  {
+    "model": "hotels.Room",
+    "fields": {
+      "name": "Habitación Basica",
+      "code": "HB01",
+      "hotel": "HTSSC01",
+      "checkin_date": "2023-01-28",
+      "checkout_date": "2023-02-04"
+    }
   },
   {
     "model": "hotels.Room",
     "fields": {
-      "name": "Habitación 1",
-      "code": "R001",
-      "hotel": "H001",
-      "checkin_date": "2023-01-28",
-      "checkout_date": "2023-02-05"
+      "name": "Habitación Estandar",
+      "code": "HE01",
+      "hotel": "HTSSC01",
+      "checkin_date": "2023-02-05",
+      "checkout_date": "2023-02-20"
     }
   },
   {
+    "model": "hotels.Room",
+    "fields": {
+      "name": "Habitación Premium",
+      "code": "HP01",
+      "hotel": "HTSSC01",
+      "checkin_date": "2023-02-01",
+      "checkout_date": "2023-02-15"
+    }
+  },
+
+  {
     "model": "hotels.Rate",
-    "pk": 1,
-    "fields": { "name": "Tarifa 1", "code": "T001", "room": 1 }
+    "fields": { "name": "Tarifa Basica", "code": "TB01", "room": 1 }
+  },
+  {
+    "model": "hotels.Rate",
+    "fields": { "name": "Tarifa Estandar", "code": "TE01", "room": 2 }
+  },
+  {
+    "model": "hotels.Rate",
+    "fields": { "name": "Tarifa Premium", "code": "TP01", "room": 3 }
   },
   {
     "model": "hotels.Inventory",
-    "pk": 1,
-    "fields": { "allotment": 20, "price": "100.00", "rate": 1 }
+    "fields": { "allotment": 0, "price": "30.00", "rate": 1 }
+  },
+  {
+    "model": "hotels.Inventory",
+    "fields": { "allotment": 0, "price": "45.00", "rate": 2 }
+  },
+  {
+    "model": "hotels.Inventory",
+    "fields": { "allotment": 0, "price": "100.00", "rate": 3 }
   }
 ]
