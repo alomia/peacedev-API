@@ -1,0 +1,251 @@
+openapi: 3.0.3
+info:
+  title: Peacedev API
+  version: 0.0.1
+  description: Una simple API para hoteles
+paths:
+  /api/availability/{code}/{checkin_date}/{checkout_date}/:
+    get:
+      operationId: availability_list
+      parameters:
+      - in: path
+        name: checkin_date
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: checkout_date
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: code
+        schema:
+          type: string
+        required: true
+      tags:
+      - availability
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InventoryDetail'
+          description: ''
+  /api/hotels/:
+    get:
+      operationId: hotels_list
+      tags:
+      - hotels
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HotelList'
+          description: ''
+    post:
+      operationId: hotels_create
+      tags:
+      - hotels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HotelList'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HotelList'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/HotelList'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelList'
+          description: ''
+  /api/hotels/{code}/:
+    get:
+      operationId: hotels_retrieve
+      parameters:
+      - in: path
+        name: code
+        schema:
+          type: string
+        required: true
+      tags:
+      - hotels
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelDetail'
+          description: ''
+    put:
+      operationId: hotels_update
+      parameters:
+      - in: path
+        name: code
+        schema:
+          type: string
+        required: true
+      tags:
+      - hotels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HotelDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HotelDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/HotelDetail'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelDetail'
+          description: ''
+    patch:
+      operationId: hotels_partial_update
+      parameters:
+      - in: path
+        name: code
+        schema:
+          type: string
+        required: true
+      tags:
+      - hotels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedHotelDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedHotelDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedHotelDetail'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelDetail'
+          description: ''
+    delete:
+      operationId: hotels_destroy
+      parameters:
+      - in: path
+        name: code
+        schema:
+          type: string
+        required: true
+      tags:
+      - hotels
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    HotelDetail:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        code:
+          type: string
+          maxLength: 100
+      required:
+      - code
+      - name
+    HotelList:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        code:
+          type: string
+          maxLength: 100
+      required:
+      - code
+      - name
+    InventoryDetail:
+      type: object
+      properties:
+        name:
+          type: string
+          readOnly: true
+        code:
+          type: string
+          readOnly: true
+        price:
+          type: string
+          format: decimal
+          pattern: ^\d{0,8}(?:\.\d{0,2})?$
+        allotment:
+          type: integer
+      required:
+      - code
+      - name
+      - price
+    PatchedHotelDetail:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        code:
+          type: string
+          maxLength: 100
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

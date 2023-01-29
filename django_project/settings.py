@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # 3rd-party apps
     "rest_framework",
+    "drf_spectacular",
     # Local
     "accounts.apps.AccountsConfig",
     "hotels.apps.HotelsConfig",
@@ -135,6 +136,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 CORS_ORIGIN_WHITELIST = (
@@ -143,3 +145,9 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Peacedev API",
+    "DESCRIPTION": "Una simple API para hoteles",
+    "VERSION": "0.0.1",
+}
